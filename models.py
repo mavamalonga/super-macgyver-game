@@ -4,7 +4,7 @@ from variables import * #all variables from this file
 pygame.init()
 		
 
-class Labyrinthe():
+class Labyrinthe:
 	def __init__(self, base, sp_size):
 		pygame.init()
 		self.base_lab = base
@@ -13,8 +13,8 @@ class Labyrinthe():
 	def init_lab(self):
 		self.structures = []
 		for ln in self.base_lab:
-			line_level = list(ln)
-			self.structures.append(line_level)
+			line = list(ln)
+			self.structures.append(line)
 
 		for x, col in enumerate(self.structures):
 			for y, case in enumerate(col):
@@ -30,5 +30,26 @@ class Labyrinthe():
 
 		pygame.display.flip()
 
+""""
+class MacGyver:
+	def __init__(self, base, sp_size):
+		self.map_list = base
+		self.x = 13
+		self.y = 7
+		self.image = pygame.image.load("ressource/MacGyver.png")
 
 
+	def display(self):
+		self.structures = []
+		for ln in self.map_list:
+			line = list(ln)
+			self.structures.append(line)
+
+		for inde_x, col in enumerate(self.structures):
+			for index_y, case in enumerate(col):
+				if case == "m":
+					x = inde_x*sp_size
+					y = index_y*sp_size
+					self.screen.blit(self.image, (x, x))
+
+"""
