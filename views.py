@@ -11,11 +11,11 @@ def game():
 	currentgame = True
 
 	# event management and display game elements
-	while currentgame:
-		Lab = Labyrinthe(lab, sp_size)
-		Lab.init_lab()
-		pygame.display.flip()
+	Lab = Labyrinthe(lab, sp_size)
+	Lab.init_lab()
 
+	while currentgame:
+		
 		for event in pygame.event.get(): #pygame.event.get() : event list keyboard and mouse
 			if event.type == pygame.QUIT:
 				sys.exit() # method  allows close window, exit game

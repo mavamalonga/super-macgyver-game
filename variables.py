@@ -5,20 +5,20 @@ pygame.init()
 sp_size = 35
 
 lab = [
-"sssssssssssssss",
-"svgvvvvvvvvvvvs",
+"sssssssesssssss",
+"slvvsvvvvvvvvls",
+"ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
+"svsvsvsvsvsvsvs",
+"svvkvvvvvvvvvvs",
+"ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
+"svsvsvsvsvsvsvs",
 "svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvvvvvvvvs",
-"svvvvvvmvvvvvvs",
+"ssvsvsvsvsvsvss",
+"svvvvvvvvvvvvds",
+"svsvsvsvsvsvsvs",
+"slvvvvvvvvvvvls",
 "sssssssssssssss"
 ]
 

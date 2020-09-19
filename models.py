@@ -20,15 +20,25 @@ class Labyrinthe:
 			for y, case in enumerate(col):
 				pos_x = x*sp_size
 				pos_y = y*sp_size
-				if case == "m":
-					self.screen.blit(pygame.image.load("ressource/MacGyver.png"), (pos_x, pos_y))
-				elif case == "g":
-					self.screen.blit(pygame.image.load("ressource/Gardien.png"), (pos_x, pos_y))
-				elif case == "s":
-					self.screen.blit(pygame.image.load("ressource/structures.png"), (pos_x, pos_y))
+
+				if case == "s":
+					self.screen.blit(pygame.image.load("ressource/stones.png"), (pos_x, pos_y))
+				elif case == "v":
+					self.screen.blit(pygame.image.load("ressource/black_bloc.png"), (pos_x, pos_y))
+				elif case == "d":
+					self.screen.blit(pygame.image.load("ressource/decorations3.png"),(pos_x, pos_y))
+				elif case == "l":
+					self.screen.blit(pygame.image.load("ressource/decorations4.png"),(pos_x, pos_y))
+				elif case == "e":
+					self.screen.blit(pygame.image.load("ressource/exit.png"),(pos_x, pos_y))
+				elif case == "k":
+					self.screen.blit(pygame.image.load("ressource/skull.png"),(pos_x, pos_y))
+
 
 
 		pygame.display.flip()
+
+
 
 """"
 class MacGyver:
