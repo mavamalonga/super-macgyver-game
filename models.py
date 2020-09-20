@@ -33,33 +33,69 @@ class Labyrinthe:
 					self.screen.blit(pygame.image.load("ressource/exit.png"),(pos_x, pos_y))
 				elif case == "k":
 					self.screen.blit(pygame.image.load("ressource/skull.png"),(pos_x, pos_y))
+				elif case == "g":
+					self.screen.blit(pygame.image.load("ressource/Gardien.png"),(pos_x, pos_y))
 
 
 
-		pygame.display.flip()
-
-
-
-""""
-class MacGyver:
+class MacGyver(pygame.sprite.Sprite):
 	def __init__(self, base, sp_size):
-		self.map_list = base
-		self.x = 13
-		self.y = 7
+		super().__init__()
+		self.base_lab = base
 		self.image = pygame.image.load("ressource/MacGyver.png")
-
-
-	def display(self):
+		self.rect = self.image.get_rect()
+		self.x = 13                                 #coordonnées index détachés de sp_size
+		self.y = 7
+		self.rect.x = self.x*sp_size
+		self.rect.y = self.y*sp_size
+	
+	def move_left(self):
 		self.structures = []
-		for ln in self.map_list:
+		for ln in self.base_lab:
 			line = list(ln)
 			self.structures.append(line)
 
-		for inde_x, col in enumerate(self.structures):
-			for index_y, case in enumerate(col):
-				if case == "m":
-					x = inde_x*sp_size
-					y = index_y*sp_size
-					self.screen.blit(self.image, (x, x))
+		if self.structures[self.x - 1][self.y] == "v":
+			self.x = self.x - 1
+			self.rect.x = self.rect.x - sp_size
+			self.rect.y = self.rect.y 
+		
+	def move_right(self):
+		self.structures = []
+		for ln in self.base_lab:
+			line = list(ln)
+			self.structures.append(line)
 
-"""
+		if self.structures[self.x + 1][self.y] == "v":
+			self.x = self.x + 1
+			self.rect.x = self.rect.x + sp_size
+			self.rect.y = self.rect.y 
+
+
+	def move_up(self):
+		self.structures = []
+		for ln in self.base_lab:
+			line = list(ln)
+			self.structures.append(line)
+
+		if self.structures[self.x][self.y - 1] == "v":
+			print(self.structures[self.x][self.y - 1])
+			self.y = self.y - 1
+			self.rect.x = self.rect.x
+			self.rect.y = self.rect.y - sp_size
+
+		
+	def move_down(self):
+		self.structures = []
+		for ln in self.base_lab:
+			line = list(ln)
+			self.structures.append(line)
+
+		if self.structures[self.x][self.y + 1] == "v":
+			self.y = self.y + 1
+			self.rect.x = self.rect.x
+			self.rect.y = self.rect.y + sp_size
+
+
+		
+

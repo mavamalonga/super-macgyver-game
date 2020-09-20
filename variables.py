@@ -2,11 +2,11 @@ import pygame
 pygame.init()
 
 
-sp_size = 35
+sp_size = 43
 
 lab = [
 "sssssssesssssss",
-"slvvsvvvvvvvvls",
+"slvvsvvgvvvvvls",
 "ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
