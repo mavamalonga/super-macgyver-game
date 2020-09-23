@@ -6,7 +6,7 @@ sp_size = 43
 
 lab = [
 "sssssssesssssss",
-"slvvsvvgvvvvvls",
+"slvvsvvvvvvvvls",
 "ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
@@ -21,4 +21,9 @@ lab = [
 "slvvvvvvvvvvvls",
 "sssssssssssssss"
 ]
+
+
+ether = 'ressource/ether1.png'
+seringue = 'ressource/seringue1.png'
+tube_plastique = 'ressource/tube_plastique1.png'
 
