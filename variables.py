@@ -1,29 +1,23 @@
 import pygame
 pygame.init()
 
-
 sp_size = 43
+screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 
 lab = [
 "sssssssesssssss",
-"slvvsvvvvvvvvls",
+"slvvsvvgvvvvvls",
 "ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
-"svvkvvvvvvvvvvs",
+"svdkvvvvvvvvvvs",
 "ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
 "svvvvvvvvvvvvvs",
 "ssvsvsvsvsvsvss",
-"svvvvvvvvvvvvds",
+"svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
 "slvvvvvvvvvvvls",
 "sssssssssssssss"
 ]
-
-
-ether = 'ressource/ether1.png'
-seringue = 'ressource/seringue1.png'
-tube_plastique = 'ressource/tube_plastique1.png'
-
