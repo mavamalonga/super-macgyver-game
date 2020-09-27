@@ -99,8 +99,15 @@ class MacGyver(pygame.sprite.Sprite):
             self.rect.y = self.rect.y + sp_size
 
     def get_objets(self):
-        if (self.rect.x, self.rect.y) == self.objets.empty_box[0]:
-            print("yes")
+        if (self.rect.x, self.rect.y) == self.objets.empty_box.get("ether"):
+            self.objets.empty_box.pop("ether")
+            self.pick_up += 1
+        if (self.rect.x, self.rect.y) == self.objets.empty_box.get("tube_platique"):
+            self.objets.empty_box.pop("tube_platique")
+            self.pick_up += 1
+        if (self.rect.x, self.rect.y) == self.objets.empty_box.get("seringue"):
+            self.objets.empty_box.pop("seringue")
+            self.pick_up += 1
 
 class Gardien(pygame.sprite.Sprite):
     def __init__(self, sp_size):
@@ -130,7 +137,12 @@ class Objets(pygame.sprite.Sprite):
             self.structures.append(line)
 
         self.empty_box_list = []
-        self.empty_box = []
+        #content selection three coordinates for items
+        self.empty_box = {
+        "ether": 0,
+        "tube_plastique": 0,
+        "seringue": 0
+        }
         for x, col in enumerate(self.structures):
             for y, case in enumerate(col):
                 pos_x = x*sp_size
@@ -141,23 +153,14 @@ class Objets(pygame.sprite.Sprite):
                     self.empty_box_list.append(pos_empty_box)
 
         # select Three empty position random for objets
-        for i in range(3):
-            self.pos = choice(self.empty_box_list)
-            self.empty_box.append(self.pos)
+        self.empty_box["ether"] = choice(self.empty_box_list)
+        self.empty_box["tube_platique"] = choice(self.empty_box_list)
+        self.empty_box["seringue"] = choice(self.empty_box_list)
 
     def display_objets(self):
-        screen.blit(self.img_ether, self.empty_box[0])
-                
-                
-
-
-
-
-        
-        
-        
-
-
-
-        
-
+        if "ether" in self.empty_box:
+            screen.blit(self.img_ether, self.empty_box.get("ether"))
+        if "tube_platique" in self.empty_box:
+            screen.blit(self.img_tube, self.empty_box.get("tube_platique"))
+        if "seringue" in self.empty_box:
+            screen.blit(self.img_seringue, self.empty_box.get("seringue"))

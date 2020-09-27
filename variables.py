@@ -6,7 +6,7 @@ screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 
 lab = [
 "sssssssesssssss",
-"slvvsvvgvvvvvls",
+"slvvsvvgvvsvvls",
 "ssvsvsvsvsvsvss",
 "svvvvvvvvvvvvvs",
 "svsvsvsvsvsvsvs",
