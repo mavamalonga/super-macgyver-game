@@ -5,19 +5,19 @@ from variables import *
 pygame.init()
         
 
-class Labyrinthe:
+class Labyrinth:
     def __init__(self, mappy, sp_size):
         pygame.init()
-        self.base_lab = mappy
+        self.mappy = mappy
         self.screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 
-    def init_lab(self):
-        self.structures = []
-        for ln in self.base_lab:
+    def build_lab(self):
+        self.mappy_copy = []
+        for ln in self.mappy:
             line = list(ln)
-            self.structures.append(line)
+            self.mappy_copy.append(line)
 
-        for x, col in enumerate(self.structures):
+        for x, col in enumerate(self.mappy_copy):
             for y, case in enumerate(col):
                 pos_x = x*sp_size
                 pos_y = y*sp_size
@@ -48,7 +48,9 @@ class MacGyver(pygame.sprite.Sprite):
         self.y = 7
         self.rect.x = self.x*sp_size
         self.rect.y = self.y*sp_size
+        self.pos_macgyver = (self.x, self.y)
         self.pick_up = 0
+        self.not_arrived = True
 
     
     def move_left(self):
@@ -57,7 +59,7 @@ class MacGyver(pygame.sprite.Sprite):
             line = list(ln)
             self.structures.append(line)
 
-        if self.structures[self.x - 1][self.y] == "v" or self.structures[self.x][self.y - 1] == "g":
+        if (self.structures[self.x - 1][self.y] == "v" or self.structures[self.x][self.y - 1] == "g") and self.not_arrived:
             self.x = self.x - 1
             self.rect.x = self.rect.x - sp_size
             self.rect.y = self.rect.y 
@@ -69,7 +71,7 @@ class MacGyver(pygame.sprite.Sprite):
             line = list(ln)
             self.structures.append(line)
 
-        if self.structures[self.x + 1][self.y] == "v" or self.structures[self.x][self.y - 1] == "g":
+        if (self.structures[self.x + 1][self.y] == "v" or self.structures[self.x][self.y - 1] == "g") and self.not_arrived:
             self.x = self.x + 1
             self.rect.x = self.rect.x + sp_size
             self.rect.y = self.rect.y 
@@ -81,7 +83,7 @@ class MacGyver(pygame.sprite.Sprite):
             line = list(ln)
             self.structures.append(line)
 
-        if self.structures[self.x][self.y - 1] == "v" or self.structures[self.x][self.y - 1] == "g":
+        if (self.structures[self.x][self.y - 1] == "v" or self.structures[self.x][self.y - 1] == "g") and self.not_arrived:
             self.y = self.y - 1
             self.rect.x = self.rect.x
             self.rect.y = self.rect.y - sp_size
@@ -93,7 +95,7 @@ class MacGyver(pygame.sprite.Sprite):
             line = list(ln)
             self.structures.append(line)
 
-        if self.structures[self.x][self.y + 1] == "v" or self.structures[self.x][self.y + 1] == "g":
+        if (self.structures[self.x][self.y + 1] == "v" or self.structures[self.x][self.y + 1] == "g") and self.not_arrived:
             self.y = self.y + 1
             self.rect.x = self.rect.x
             self.rect.y = self.rect.y + sp_size
@@ -109,7 +111,7 @@ class MacGyver(pygame.sprite.Sprite):
             self.objets.empty_box.pop("seringue")
             self.pick_up += 1
 
-class Gardien(pygame.sprite.Sprite):
+class Guardian(pygame.sprite.Sprite):
     def __init__(self, sp_size):
         super().__init__()
         self.x = 1
@@ -118,10 +120,10 @@ class Gardien(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.x*sp_size
         self.rect.y = self.y*sp_size
-        self.pos_mac =(self.x*sp_size, self.y*sp_size)
+        self.pos_guardian = (self.x, self.y)
 
 
-class Objets(pygame.sprite.Sprite):
+class Objects(pygame.sprite.Sprite):
     def __init__(self, lab, sp_size):
         super().__init__()
         self.base_lab = lab
