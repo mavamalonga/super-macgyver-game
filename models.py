@@ -21,9 +21,10 @@ class Labyrinth:
 
     def build_lab(self):
         self.mappy_copy = []
-        for ln in self.mappy:
-            line = list(ln)
-            self.mappy_copy.append(line)
+        with open(self.mappy, "r") as f:
+            for ln in f:
+                line = list(ln)
+                self.mappy_copy.append(line)
 
         for x, col in enumerate(self.mappy_copy):  #retrieve the coordinates of the cases to display the images
             for y, box in enumerate(col):
@@ -68,14 +69,15 @@ class MacGyver(pygame.sprite.Sprite):
         self.pick_up = 0
         self.not_arrived = True   #condition d'arret du jeu lors que macgyver se trouve en position de sorti
         self.mappy_copy = []
-        for ln in self.mappy:
-            line = list(ln)
-            self.mappy_copy.append(line)
+        with open(self.mappy, "r") as f:
+            for ln in f:
+                line = list(ln)
+                self.mappy_copy.append(line)
 
     """
     Les 4 methodes ci dessous correspondent vont gerer les deplacemengt du sprite macgyver 
     Chaque méthode correspond a une direction de déplament
-    elle seront appelés les evenement clavier 
+    elle seront appelés lors des evenement clavier correspondent
     Pour chaque deplament la condition if verifie si le deplacement est possible
 
     """
@@ -140,7 +142,7 @@ class Guardian(pygame.sprite.Sprite):
 
 """
 class Objects
-generer les les objets sur la fenetre
+generer les objets sur la fenetre
 definir les position les position des objects aleatoirement 
 """
 class Objects(pygame.sprite.Sprite):
@@ -152,10 +154,11 @@ class Objects(pygame.sprite.Sprite):
         self.img_seringue = pygame.image.load('ressource/seringue1.png')
 
         
-        self.mappy_copy = []
-        for ln in self.mappy:
-            line = list(ln)
-            self.mappy_copy.append(line)
+        with open(self.mappy, "r") as f:
+            self.mappy_copy = []
+            for ln in f:
+                line = list(ln)
+                self.mappy_copy.append(line)
 
         self.empty_box_list = []
         for x, col in enumerate(self.mappy_copy):
