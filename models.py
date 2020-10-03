@@ -154,11 +154,11 @@ class Objects(pygame.sprite.Sprite):
         self.img_seringue = pygame.image.load('ressource/seringue1.png')
 
         
-        with open(self.mappy, "r") as f:
+        with open(self.mappy, "r") as f: 
             self.mappy_copy = []
             for ln in f:
                 line = list(ln)
-                self.mappy_copy.append(line)
+                self.mappy_copy.append(line) #liste embriqué
 
         self.empty_box_list = []
         for x, col in enumerate(self.mappy_copy):
