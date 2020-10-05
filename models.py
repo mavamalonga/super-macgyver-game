@@ -26,13 +26,14 @@ class Labyrinth:
                 line = list(ln)
                 self.mappy_copy.append(line)
 
-        for x, col in enumerate(self.mappy_copy):  #retrieve the coordinates of the cases to display the images
+        #retrieve the coordinates of the cases to display the images
+        for x, col in enumerate(self.mappy_copy):  
             for y, box in enumerate(col):
                 pos_x = x*sp_size
                 pos_y = y*sp_size
 
                 
-               # on va attribuer a chaque case l'image qu'il lui convient 
+               #we will assign to each box the image that suits it 
 
                 if box == "s":
                     self.screen.blit(pygame.image.load("ressource/stones.png"), (pos_x, pos_y))
@@ -49,9 +50,8 @@ class Labyrinth:
 
 """
 Class MacGyver 
-va afficher macgyver, gerer ses deplacements 
-gerer le ramassage des objets
-
+will display macgyver, manage its movements 
+manage the collection of objects
 """
 
 class MacGyver(pygame.sprite.Sprite):
@@ -67,7 +67,7 @@ class MacGyver(pygame.sprite.Sprite):
         self.rect.y = self.y*sp_size
         self.pos_macgyver = (self.x, self.y)
         self.pick_up = 0
-        self.not_arrived = True   #condition d'arret du jeu lors que macgyver se trouve en position de sorti
+        self.not_arrived = True   #stop mouv macgyver
         self.mappy_copy = []
         with open(self.mappy, "r") as f:
             for ln in f:
@@ -75,11 +75,8 @@ class MacGyver(pygame.sprite.Sprite):
                 self.mappy_copy.append(line)
 
     """
-    Les 4 methodes ci dessous correspondent vont gerer les deplacemengt du sprite macgyver 
-    Chaque méthode correspond a une direction de déplament
-    elle seront appelés lors des evenement clavier correspondent
-    Pour chaque deplament la condition if verifie si le deplacement est possible
-
+    The 4 methods below will manage the movement of the macgyver sprite
+    Each method corresponds to a direction of displacement
     """
     def move_left(self):
         if (self.mappy_copy[self.x - 1][self.y] == "v" or self.mappy_copy[self.x][self.y - 1] == "g") and self.not_arrived:
@@ -107,12 +104,10 @@ class MacGyver(pygame.sprite.Sprite):
             self.rect.x = self.rect.x
             self.rect.y = self.rect.y + sp_size
 
-            """
-            cette methode recupe la position des objets depuis la classe objets le compare a la position macgyver
-            supprimer les objets ramassé 
-            incrementer le compter d'objets ramassé
-            """
+            
+    #remove picked up items,increment the count pick_up
     def get_objects(self):
+      
         if (self.rect.x, self.rect.y) == self.objets.dict_objects.get("ether"):
             self.objets.dict_objects.pop("ether")
             self.pick_up += 1
@@ -126,7 +121,7 @@ class MacGyver(pygame.sprite.Sprite):
 
 """
 class Guardian
-definie les caracteres du gardien
+define the guardian's characters
 display the guardien
 """
 class Guardian(pygame.sprite.Sprite):
@@ -142,8 +137,8 @@ class Guardian(pygame.sprite.Sprite):
 
 """
 class Objects
-generer les objets sur la fenetre
-definir les position les position des objects aleatoirement 
+generate objects on the window
+define the positions of objects randomly
 """
 class Objects(pygame.sprite.Sprite):
     def __init__(self, mappy, sp_size):
@@ -158,7 +153,7 @@ class Objects(pygame.sprite.Sprite):
             self.mappy_copy = []
             for ln in f:
                 line = list(ln)
-                self.mappy_copy.append(line) #liste embriqué
+                self.mappy_copy.append(line)
 
         self.empty_box_list = []
         for x, col in enumerate(self.mappy_copy):
@@ -167,20 +162,21 @@ class Objects(pygame.sprite.Sprite):
                 pos_y = y*sp_size
 
                 if box == "v":
-                    pos_empty_box = (pos_x, pos_y)                # recuperer les coordonnées des cases vides de la structure
+                    pos_empty_box = (pos_x, pos_y)                #retrieve the coordinates of the empty cells of the structure
                     self.empty_box_list.append(pos_empty_box)
 
-        self.dict_objects = {       #bibliotheque qui va héberger les cordonnées de des objets
+        self.dict_objects = {       #library which will house the coordinates of objects
         "ether": 0,
         "tube_plastique": 0,
         "seringue": 0
         }
 
-        self.dict_objects["ether"] = choice(self.empty_box_list)       #random choice choisir un index aléatoire dans la liste 
+        self.dict_objects["ether"] = choice(self.empty_box_list)       #random choice choose a random index from the list 
         self.dict_objects["tube_platique"] = choice(self.empty_box_list)
         self.dict_objects["seringue"] = choice(self.empty_box_list)
 
-    def display_objects(self):    #vérifier l'existence de la clé demandé dans la bibliotheque puis l'afficher 
+    #check the existence of the requested key in the library then display it
+    def display_objects(self):    
         if "ether" in self.dict_objects:
             screen.blit(self.img_ether, self.dict_objects.get("ether"))
         if "tube_platique" in self.dict_objects:

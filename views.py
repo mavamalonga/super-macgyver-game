@@ -8,44 +8,52 @@ from variables import *
 
 pygame.init()
 pygame.font.init()
-screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
+
+
+#function checks the win or defeat condition
+def win_or_gameover(macgyver, guardian):
+	if macgyver.rect.x == guardian.rect.x and macgyver.rect.y == guardian.rect.y:  
+		if macgyver.pick_up == 3:
+			screen.blit(pygame.image.load('ressource/you_win.png'), (2*sp_size, 5*sp_size))
+			macgyver.not_arrived = False
+		else:
+			screen.blit(pygame.image.load('ressource/game_over.png'), (1*2*sp_size, 5*sp_size))
+			macgyver.not_arrived = False
+
+
+#function the score counter
+def score_count(macgyver):
+	pick_up = macgyver.pick_up
+	yellow =(255, 255, 0)
+	text = pygame.font.SysFont('impact', 20)
+	counter_pickup_objets = text.render("backpack: " + str(pick_up) + "/3", 50, yellow, (0, 0, 0))
+	screen.blit(counter_pickup_objets, (260, 10))
+
+
 
 """
 def game():
-run the program
 call the classes
 manage keyboard events
-defines the conditions of victory and defeat
 """
 def game():  
 
-	current_game = True
+
+	screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 	Lab = Labyrinth("mappy.txt", sp_size)  
-	Lab.build_lab()     # On execute l'arriere plan du jeu, le labirynth
+	Lab.build_lab()
 	objects = Objects("mappy.txt", sp_size)
 	macgyver = MacGyver("mappy.txt", sp_size, objects)
 	guardian = Guardian(sp_size)
-	yellow =(255, 255, 0)
-	text = pygame.font.SysFont('impact', 20)
 	pygame.display.flip()
-	
-	
-	while current_game:    #maintain the display of the window
-		"""
-		the game loop, as long as current_game is true
-		le code contenu dans cette fenetre va s'executer en boucle
-		"""
 
-		#display all sprite of the game 
+	current_game = True
+
+	while current_game:
 		
-		objects.display_objects()
-		screen.blit(guardian.image, (guardian.rect.x, guardian.rect.y))
-		screen.blit(macgyver.image, (macgyver.rect.x, macgyver.rect.y))
-		pick_up = macgyver.pick_up
 
-
-		for event in pygame.event.get(): # la boucle for va s'activer a chaque evenement, clavier, souris	
-			if event.type == pygame.QUIT: # event.type renvoie l'evenement, actionné 
+		for event in pygame.event.get(): # the for loop will activate at each event, keyboard, mouse	
+			if event.type == pygame.QUIT: # event.type returns the event, activated
 				sys.exit()
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
@@ -59,23 +67,15 @@ def game():
 				macgyver.get_objects()
 
 				Lab.build_lab()
+				win_or_gameover(macgyver, guardian)
 
-				
 
-
-				#gestion de condition de victoire et de défaite
-				if macgyver.rect.x == guardian.rect.x and macgyver.rect.y == guardian.rect.y:  
-					if macgyver.pick_up == 3:
-						screen.blit(pygame.image.load('ressource/you_win.png'), (2*sp_size, 5*sp_size))
-						macgyver.not_arrived = False
-					else:
-						screen.blit(pygame.image.load('ressource/game_over.png'), (1*2*sp_size, 5*sp_size))
-						macgyver.not_arrived = False
-
-		#recuperer la variable pick_up le convertir en str et l'afficher
-		counter_pickup_objets = text.render("backpack: " + str(pick_up) + "/3", 50, yellow, (0, 0, 0))
-		screen.blit(counter_pickup_objets, (260, 10))
+		objects.display_objects()
+		screen.blit(guardian.image, (guardian.rect.x, guardian.rect.y))
+		screen.blit(macgyver.image, (macgyver.rect.x, macgyver.rect.y))
+		score_count(macgyver)
 		pygame.display.flip()
+		
 		
 
 
