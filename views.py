@@ -32,11 +32,12 @@ def score_count(macgyver):
 
 
 """
-def game():
+def main():
 call the classes
 manage keyboard events
+call game function
 """
-def game():  
+def main():  
 
 
 	screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
@@ -75,10 +76,8 @@ def game():
 		screen.blit(macgyver.image, (macgyver.rect.x, macgyver.rect.y))
 		score_count(macgyver)
 		pygame.display.flip()
-		
-		
 
 
 
 if __name__ == '__main__':
-	game()
+	main()
