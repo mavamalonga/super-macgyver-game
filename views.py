@@ -21,16 +21,6 @@ def win_or_gameover(macgyver, guardian):
 			macgyver.not_arrived = False
 
 
-#function the score counter
-def score_count(macgyver):
-	pick_up = macgyver.pick_up
-	yellow =(255, 255, 0)
-	text = pygame.font.SysFont('impact', 20)
-	counter_pickup_objets = text.render("backpack: " + str(pick_up) + "/3", 50, yellow, (0, 0, 0))
-	screen.blit(counter_pickup_objets, (260, 10))
-
-
-
 """
 def main():
 call the classes
@@ -41,8 +31,8 @@ def main():
 
 
 	screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
-	Lab = Labyrinth("mappy.txt", sp_size)  
-	Lab.build_lab()
+	Lab = Labyrinth("mappy.txt", sp_size)
+	Lab.build_lab()  
 	objects = Objects("mappy.txt", sp_size)
 	macgyver = MacGyver("mappy.txt", sp_size, objects)
 	guardian = Guardian(sp_size)
@@ -52,6 +42,7 @@ def main():
 
 	while current_game:
 		
+
 
 		for event in pygame.event.get(): # the for loop will activate at each event, keyboard, mouse	
 			if event.type == pygame.QUIT: # event.type returns the event, activated
@@ -74,7 +65,7 @@ def main():
 		objects.display_objects()
 		screen.blit(guardian.image, (guardian.rect.x, guardian.rect.y))
 		screen.blit(macgyver.image, (macgyver.rect.x, macgyver.rect.y))
-		score_count(macgyver)
+		macgyver.score_count()
 		pygame.display.flip()
 
 

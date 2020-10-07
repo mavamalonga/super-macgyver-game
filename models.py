@@ -118,6 +118,14 @@ class MacGyver(pygame.sprite.Sprite):
             self.objets.dict_objects.pop("seringue")
             self.pick_up += 1
 
+    #function the score counter
+    def score_count(self):
+        yellow =(255, 255, 0)
+        text = pygame.font.SysFont('impact', 20)
+        counter_pickup_objets = text.render("backpack: " + str(self.pick_up) + "/3", 50, yellow, (0, 0, 0))
+        screen.blit(counter_pickup_objets, (260, 10))
+
+
 
 """
 class Guardian
