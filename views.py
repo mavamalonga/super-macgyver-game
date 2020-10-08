@@ -11,7 +11,7 @@ pygame.font.init()
 
 
 #function checks the win or defeat condition
-def win_or_gameover(macgyver, guardian):
+def arbitror(macgyver, guardian):
 	if macgyver.rect.x == guardian.rect.x and macgyver.rect.y == guardian.rect.y:  
 		if macgyver.pick_up == 3:
 			screen.blit(pygame.image.load('ressource/you_win.png'), (2*sp_size, 5*sp_size))
@@ -59,7 +59,7 @@ def main():
 				macgyver.get_objects()
 
 				Lab.build_lab()
-				win_or_gameover(macgyver, guardian)
+				arbitror(macgyver, guardian)
 
 
 		objects.display_objects()
