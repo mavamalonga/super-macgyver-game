@@ -1,26 +1,32 @@
-Aidez MacGyver à s'échapper !
+MacGyver game !
 
 
-vous imaginez un labyrinthe 2D dans lequel MacGyver aurait été enfermé. La sortie est surveillée par un garde du corps dont la coiffure ferait pâlir Tina Turner. Pour le distraire, il vous faut réunir les éléments suivants (dispersés dans le labyrinthe) : une aiguille, un petit tube en plastique et de l'éther. Ils permettront à MacGyver de créer une seringue et d'endormir notre garde.
+
+L'application est un jeu en 2D ou un héro incarné par MacGyver 
+piegé dans un labyrinthe par un méchant gardien, doit trouver
+le moyen de s'échapper et de retrouver sa liberté.
+
+Macgyver à l'ingenieuse idée de créer un poison lui permettant
+d'endormir le grand méchant gardien, qui surveille la porte de sortie.
+
+Le but du jeu sera de guider le héro dans ses déplacement 
+afin de récuperer des objets dispersés dans le labyrinthe.
+
+Liste des objets :
+    ether
+    tube en plastique
+    seringue
+
+commandes du jeu : touches directionnelles
+
+L'environnement de développement avec pygame et python 3.
+Executez l'application avec le fichier views.py.
 
 
-Pour commencer :
-Analysez le problème, décager les grands composants du jeu.
-Construire des digrammes de classes.
-Préparer l'environnement de développement avec pygame et python 3.
 
 
-Démarrage :
-Exectez l'application avec le fichier views.py.
-commande terminal : python views.py 
 
 
-Fabriqué avec :
-- Sublime text 3
-- Gitbash
 
-
-Auteurs :
-- Alpha
-contributeur : Alexandre
+by Alpha and contribution of Alexandre
 
