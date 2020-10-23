@@ -18,6 +18,7 @@ class Labyrinth:
         pygame.init()
         self.mappy = mappy
         self.screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
+        self.empty_box_list = []
 
     def build_lab(self):
         self.mappy_copy = []
@@ -26,19 +27,16 @@ class Labyrinth:
                 line = list(ln)
                 self.mappy_copy.append(line)
 
-        #retrieve the coordinates of the cases to display the images
         for x, col in enumerate(self.mappy_copy):  
             for y, box in enumerate(col):
                 pos_x = x*sp_size
                 pos_y = y*sp_size
 
-                
-               #we will assign to each box the image that suits it 
-
                 if box == "s":
                     self.screen.blit(pygame.image.load("ressource/stones.png"), (pos_x, pos_y))
                 elif box == "v":
                     self.screen.blit(pygame.image.load("ressource/black_bloc.png"), (pos_x, pos_y))
+                    self.empty_box_list.append((pos_x, pos_y))
                 elif box == "d":
                     self.screen.blit(pygame.image.load("ressource/decorations3.png"),(pos_x, pos_y))
                 elif box == "l":
@@ -47,6 +45,7 @@ class Labyrinth:
                     self.screen.blit(pygame.image.load("ressource/exit.png"),(pos_x, pos_y))
                 elif box == "k":
                     self.screen.blit(pygame.image.load("ressource/skull.png"),(pos_x, pos_y))
+               
 
 """
 Class MacGyver 
@@ -67,7 +66,7 @@ class MacGyver(pygame.sprite.Sprite):
         self.rect.y = self.y*sp_size
         self.pos_macgyver = (self.x, self.y)
         self.pick_up = 0
-        self.not_arrived = True   #stop mouv macgyver
+        self.not_arrived = True
         self.mappy_copy = []
         with open(self.mappy, "r") as f:
             for ln in f:
@@ -105,7 +104,6 @@ class MacGyver(pygame.sprite.Sprite):
             self.rect.y = self.rect.y + sp_size
 
             
-    #remove picked up items,increment the count pick_up
     def get_objects(self):
       
         if (self.rect.x, self.rect.y) == self.objets.dict_objects.get("ether"):
@@ -118,7 +116,6 @@ class MacGyver(pygame.sprite.Sprite):
             self.objets.dict_objects.pop("seringue")
             self.pick_up += 1
 
-    #function the score counter
     def score_count(self):
         yellow =(255, 255, 0)
         text = pygame.font.SysFont('impact', 20)
@@ -149,41 +146,25 @@ generate objects on the window
 define the positions of objects randomly
 """
 class Objects(pygame.sprite.Sprite):
-    def __init__(self, mappy, sp_size):
+    def __init__(self, Lab):
         super().__init__()
-        self.mappy = mappy
+        self.lab = Lab
         self.img_ether = pygame.image.load('ressource/ether1.png')
         self.img_tube = pygame.image.load('ressource/tube_plastique1.png')
         self.img_seringue = pygame.image.load('ressource/seringue1.png')
 
-        
-        with open(self.mappy, "r") as f: 
-            self.mappy_copy = []
-            for ln in f:
-                line = list(ln)
-                self.mappy_copy.append(line)
 
-        self.empty_box_list = []
-        for x, col in enumerate(self.mappy_copy):
-            for y, box in enumerate(col):
-                pos_x = x*sp_size
-                pos_y = y*sp_size
-
-                if box == "v":
-                    pos_empty_box = (pos_x, pos_y)                #retrieve the coordinates of the empty cells of the structure
-                    self.empty_box_list.append(pos_empty_box)
-
-        self.dict_objects = {       #library which will house the coordinates of objects
+        self.dict_objects = {
         "ether": 0,
         "tube_plastique": 0,
         "seringue": 0
         }
 
-        self.dict_objects["ether"] = choice(self.empty_box_list)       #random choice choose a random index from the list 
-        self.dict_objects["tube_platique"] = choice(self.empty_box_list)
-        self.dict_objects["seringue"] = choice(self.empty_box_list)
+        
+        self.dict_objects["ether"] =  self.lab.empty_box_list[randint(0, 122)]
+        self.dict_objects["tube_platique"] = self.lab.empty_box_list[randint(0, 122)]
+        self.dict_objects["seringue"] = self.lab.empty_box_list[randint(0, 122)]
 
-    #check the existence of the requested key in the library then display it
     def display_objects(self):    
         if "ether" in self.dict_objects:
             screen.blit(self.img_ether, self.dict_objects.get("ether"))

@@ -33,7 +33,7 @@ def main():
 	screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 	Lab = Labyrinth("mappy.txt", sp_size)
 	Lab.build_lab()  
-	objects = Objects("mappy.txt", sp_size)
+	objects = Objects(Lab)
 	macgyver = MacGyver("mappy.txt", sp_size, objects)
 	guardian = Guardian(sp_size)
 	pygame.display.flip()
