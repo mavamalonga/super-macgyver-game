@@ -2,15 +2,14 @@
 import sys
 import pygame
 from random import *
-from models import Labyrinth, MacGyver
-from models import Guardian, Objects
+from macgyver import MacGyver
+from guardian import Guardian
+from labyrinth import Labyrinth
+from objects import Objects
 from variables import *
-
 pygame.init()
 pygame.font.init()
 
-
-#function checks the win or defeat condition
 def arbitror(macgyver, guardian):
 	if macgyver.rect.x == guardian.rect.x and macgyver.rect.y == guardian.rect.y:  
 		if macgyver.pick_up == 3:
@@ -20,7 +19,6 @@ def arbitror(macgyver, guardian):
 			screen.blit(pygame.image.load('ressource/game_over.png'), (1*2*sp_size, 5*sp_size))
 			macgyver.not_arrived = False
 
-
 """
 def main():
 call the classes
@@ -29,23 +27,20 @@ call game function
 """
 def main():  
 
-
 	screen = pygame.display.set_mode((15*sp_size, 15*sp_size))
 	Lab = Labyrinth("mappy.txt", sp_size)
-	Lab.build_lab()  
+	Lab.convert_file_txt()
+	Lab.get_pos()
 	objects = Objects(Lab)
-	macgyver = MacGyver("mappy.txt", sp_size, objects)
+	objects.random()
+	macgyver = MacGyver("mappy.txt", sp_size, objects, Lab)
 	guardian = Guardian(sp_size)
 	pygame.display.flip()
-
 	current_game = True
 
 	while current_game:
-		
-
-
-		for event in pygame.event.get(): # the for loop will activate at each event, keyboard, mouse	
-			if event.type == pygame.QUIT: # event.type returns the event, activated
+		for event in pygame.event.get():	
+			if event.type == pygame.QUIT:
 				sys.exit()
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
@@ -58,9 +53,8 @@ def main():
 					macgyver.move_down()
 				macgyver.get_objects()
 
-				Lab.build_lab()
+				Lab.get_pos()
 				arbitror(macgyver, guardian)
-
 
 		objects.display_objects()
 		screen.blit(guardian.image, (guardian.rect.x, guardian.rect.y))
